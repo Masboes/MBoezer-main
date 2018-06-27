@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DemoSketch} from "./sketches/DemoSketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -9,6 +10,8 @@ export class P5SketchesPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let sketch = new DemoSketch();
+    sketch.init();
   }
 
 }
