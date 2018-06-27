@@ -1,0 +1,23 @@
+.mboezer-layout-container, .mboezer-body, body, html {
+  height: 100%;
+}
+
+.mboezer-body .mdl-layout__header .mdl-layout__drawer-button {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.mboezer-drawer {
+  border: none;
+}
+/* iOS Safari specific workaround */
+.mboezer-drawer .mdl-menu__container {
+  z-index: -1;
+}
+.mboezer-drawer .demo-navigation {
+  z-index: -2;
+}
+/* END iOS Safari specific workaround */
+.mboezer-drawer .mdl-menu .mdl-menu__item {
+  display: flex;
+  align-items: center;
+}
