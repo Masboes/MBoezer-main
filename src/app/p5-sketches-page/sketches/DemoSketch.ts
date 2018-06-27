@@ -11,7 +11,6 @@ export class DemoSketch extends Sketch {
 
   protected draw(p: any): () => void {
     return () => {
-      console.log(p.mouseIsPressed);
       if (p.mouseIsPressed) {
         p.fill(0);
       } else {

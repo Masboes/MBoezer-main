@@ -17,11 +17,15 @@ export abstract class Sketch {
       p.setup = () => {
         let canvas = p.createCanvas(holder.clientWidth, holder.clientHeight);
         canvas.parent('sketch-holder');
-        console.log('hello');
+
         me.setup(p)();
       };
 
       p.draw = () => {
+        if(holder.clientWidth != p.width || holder.clientHeight != p.height) {
+          p.resizeCanvas(holder.clientWidth, holder.clientHeight);
+        }
+
         me.draw(p)();
       };
     };
