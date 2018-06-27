@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolsPageComponent } from './tools-page.component';
+import { P5SketchesPageComponent } from './p5-sketches-page.component';
 
-describe('ToolsPageComponent', () => {
-  let component: ToolsPageComponent;
-  let fixture: ComponentFixture<ToolsPageComponent>;
+describe('P5SketchesPageComponent', () => {
+  let component: P5SketchesPageComponent;
+  let fixture: ComponentFixture<P5SketchesPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolsPageComponent ]
+      declarations: [ P5SketchesPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolsPageComponent);
+    fixture = TestBed.createComponent(P5SketchesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

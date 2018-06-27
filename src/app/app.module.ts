@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ToolsPageComponent } from './tools-page/tools-page.component';
+import { P5SketchesPageComponent } from './p5-sketches-page/p5-sketches-page.component';
 import {RouterModule, Routes} from "@angular/router";
+import { HomePageComponent } from './home-page/home-page.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'tools', pathMatch: 'full'},
-  { path: 'tools', component: ToolsPageComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'p5-sketches', component: P5SketchesPageComponent},
 ];
 
 @NgModule({
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
     AppComponent,
     SidebarComponent,
     ToolbarComponent,
-    ToolsPageComponent
+    P5SketchesPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
