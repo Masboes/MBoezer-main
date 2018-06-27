@@ -1,0 +1,33 @@
+declare let p5;
+
+export abstract class Sketch {
+  public abstract name: string;
+  private holderId: string = 'sketch-holder';
+
+  protected p5; // declare it to please typescript
+
+  public init(): void {
+    let holder = document.querySelector('#' + this.holderId);
+    this.p5 = new p5(this.sketch(holder));
+  }
+
+  protected sketch(holder: Element): (p: any) => void {
+    let me = this;
+    return (p: any) => {
+      p.setup = () => {
+        let canvas = p.createCanvas(holder.clientWidth, holder.clientHeight);
+        canvas.parent('sketch-holder');
+        console.log('hello');
+        me.setup(p)();
+      };
+
+      p.draw = () => {
+        me.draw(p)();
+      };
+    };
+
+  }
+
+  protected abstract setup(p: any): () => void;
+  protected abstract draw(p: any): () => void;
+}
