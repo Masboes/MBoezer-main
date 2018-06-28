@@ -11,12 +11,14 @@ export class P5SketchesPageComponent implements OnInit {
   private sketchCards: Sketch[] = [
     new DemoSketch(),
   ];
+  private cardsEnabled = true;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
       if(params['sketch']) {
+        this.cardsEnabled = false;
         this.loadSketchByName(params['sketch']);
       }
     })
