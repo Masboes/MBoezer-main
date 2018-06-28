@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
+import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -10,6 +11,7 @@ import {Sketch} from "./sketches/sketch";
 export class P5SketchesPageComponent implements OnInit {
   private sketchCards: Sketch[] = [
     new DemoSketch(),
+    new GameOfLifeSketch()
   ];
   private cardsEnabled = true;
 
