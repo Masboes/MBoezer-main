@@ -4,6 +4,7 @@ export abstract class Sketch {
   public abstract sketchName: string;
   public abstract sketchTitle: string;
   public abstract sketchImage: string;
+  public abstract sketchDescription: string;
 
   private holderId: string = 'sketch-holder';
 

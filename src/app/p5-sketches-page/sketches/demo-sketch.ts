@@ -3,7 +3,8 @@ import {Sketch} from "./sketch";
 export class DemoSketch extends Sketch {
   public sketchName: string = 'demo-sketch';
   public sketchTitle: string = 'Demo Sketch';
-  public sketchImage: string = '/';
+  public sketchImage: string = '/assets/images/sketches/demo-sketch.png';
+  public sketchDescription: string = 'Demo sketch to test the system.';
 
   protected setup(p: any): () => void {
     return () => {
