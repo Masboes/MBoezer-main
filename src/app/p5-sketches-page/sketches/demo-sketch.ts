@@ -1,8 +1,9 @@
 import {Sketch} from "./sketch";
 
 export class DemoSketch extends Sketch {
-  public static sketchName: string = 'demo-sketch';
-  public static sketchTitle: string = 'Demo Sketch';
+  public sketchName: string = 'demo-sketch';
+  public sketchTitle: string = 'Demo Sketch';
+  public sketchImage: string = '/';
 
   protected setup(p: any): () => void {
     return () => {

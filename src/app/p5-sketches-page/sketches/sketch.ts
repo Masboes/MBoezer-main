@@ -1,9 +1,10 @@
 declare let p5;
 
 export abstract class Sketch {
-  public static sketchName: string = 'some-sketch';
-  public static sketchTitle: string = 'Some Sketch';
-  public static sketchImage: string = '../../../assets/images/default-sketch.png';
+  public abstract sketchName: string;
+  public abstract sketchTitle: string;
+  public abstract sketchImage: string;
+
   private holderId: string = 'sketch-holder';
 
   protected p5; // declare it to please typescript
@@ -18,7 +19,7 @@ export abstract class Sketch {
     return (p: any) => {
       p.setup = () => {
         let canvas = p.createCanvas(holder.clientWidth, holder.clientHeight);
-        canvas.parent('sketch-holder');
+        canvas.parent(this.holderId);
 
         me.setup(p)();
       };
