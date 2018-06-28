@@ -1,7 +1,9 @@
 declare let p5;
 
 export abstract class Sketch {
-  public abstract name: string;
+  public static sketchName: string = 'some-sketch';
+  public static sketchTitle: string = 'Some Sketch';
+  public static sketchImage: string = '../../../assets/images/default-sketch.png';
   private holderId: string = 'sketch-holder';
 
   protected p5; // declare it to please typescript

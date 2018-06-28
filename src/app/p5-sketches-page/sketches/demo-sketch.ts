@@ -1,11 +1,12 @@
-import {Sketch} from "./Sketch";
+import {Sketch} from "./sketch";
 
 export class DemoSketch extends Sketch {
-  public name: string = 'Demo Sketch';
+  public static sketchName: string = 'demo-sketch';
+  public static sketchTitle: string = 'Demo Sketch';
 
   protected setup(p: any): () => void {
     return () => {
-      console.log('setup');
+
     }
   }
 

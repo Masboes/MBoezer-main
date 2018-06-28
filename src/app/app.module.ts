@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomePageComponent},
   { path: 'p5-sketches', component: P5SketchesPageComponent},
-  { path: 'p5-sketches/:sketchId', component: P5SketchesPageComponent},
+  { path: 'p5-sketches/:sketch', component: P5SketchesPageComponent},
   { path: 'about', component: AboutPageComponent},
 ];
 
