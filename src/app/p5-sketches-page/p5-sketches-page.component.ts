@@ -3,6 +3,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
 import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
+import {SolarSystemSketch} from "./sketches/solar-system-sketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -11,7 +12,8 @@ import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
 export class P5SketchesPageComponent implements OnInit {
   private sketchCards: Sketch[] = [
     new DemoSketch(),
-    new GameOfLifeSketch()
+    new GameOfLifeSketch(),
+    new SolarSystemSketch(),
   ];
   private cardsEnabled = true;
 

@@ -32,10 +32,27 @@ export abstract class Sketch {
 
         me.draw(p)();
       };
+
+      p.mousePressed = () => {
+        me.mousePressed(p)();
+      };
+
+      p.mouseReleased = () => {
+        me.mouseReleased(p)();
+      };
     };
 
   }
 
+  // mandatory overwrite
   protected abstract setup(p: any): () => void;
   protected abstract draw(p: any): () => void;
+
+  // optional overwrite
+  protected mousePressed(p: any): () => void {
+    return () => {};
+  }
+  protected mouseReleased(p: any): () => void {
+    return () => {};
+  }
 }
