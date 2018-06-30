@@ -15,6 +15,12 @@ export abstract class Sketch {
     this.p5 = new p5(this.sketch(holder));
   }
 
+  public remove(): void {
+    if(this.p5) {
+      this.p5.remove();
+    }
+  }
+
   protected sketch(holder: Element): (p: any) => void {
     let me = this;
     return (p: any) => {
