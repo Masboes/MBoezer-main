@@ -3,8 +3,8 @@ import {Sketch} from "./sketch";
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';
   public sketchTitle: string = 'Game of Life';
-  public sketchImage: string = '/assets/images/sketches/demo-sketch.png';
-  public sketchDescription: string = 'Demo sketch to test the system.';
+  public sketchImage: string = '/assets/images/sketches/game-of-life-sketch.png';
+  public sketchDescription: string = 'Recreation of Conway\'s Game of Life';
 
   readonly blockSize = 15;
   private grid: boolean[][] = [];
