@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
@@ -17,6 +17,8 @@ export class P5SketchesPageComponent implements OnInit {
   ];
   public cardsEnabled = true;
   public currentSketch: Sketch;
+
+  @ViewChild('.p5Canvas') private canvas: any;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
@@ -47,5 +49,9 @@ export class P5SketchesPageComponent implements OnInit {
 
   public refreshBtn(): void {
     this.loadSketchByName(this.currentSketch.sketchName);
+  }
+
+  public screenshotBtn(): void {
+    this.currentSketch.saveScreenshot();
   }
 }

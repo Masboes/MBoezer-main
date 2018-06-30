@@ -21,13 +21,19 @@ export abstract class Sketch {
     }
   }
 
+  public saveScreenshot(): void {
+    if(this.p5) {
+      this.p5.saveCanvas(this.p5.canvas, this.getScreenshotFileName(), 'png');
+    }
+  }
+
   protected sketch(holder: Element): (p: any) => void {
     let me = this;
     return (p: any) => {
       p.setup = () => {
         let canvas = p.createCanvas(holder.clientWidth, holder.clientHeight);
         canvas.parent(this.holderId);
-
+        p.canvas = canvas; // save canvas for outside usage
         me.setup(p)();
       };
 
@@ -60,5 +66,9 @@ export abstract class Sketch {
   }
   protected mouseReleased(p: any): () => void {
     return () => {};
+  }
+
+  private getScreenshotFileName(): string {
+    return 'screenshot-' + (new Date().toISOString()) + '.png';
   }
 }
