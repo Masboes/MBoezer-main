@@ -6,6 +6,10 @@
   left: 0;
 }
 
+#sketch-buttons > button {
+  z-index: 1;
+}
+
 .mboezer-card-square.mdl-card {
   width: 320px;
   height: 320px;
@@ -49,3 +53,28 @@
   transform: translateY(-50%);
   padding-left: 15px;
 }
+
+.sketch-button-right-top {
+  position: absolute !important;
+  right: 2rem;
+  top: 2rem;
+}
+
+.sketch-button-right-bottom {
+  position: absolute !important;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.sketch-button-left-top {
+  position: absolute !important;
+  left: 2rem;
+  top: 2rem;
+}
+
+.sketch-button-left-bottom {
+  position: absolute !important;
+  left: 2rem;
+  bottom: 2rem;
+}
+

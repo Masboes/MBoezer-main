@@ -7,10 +7,11 @@ export class GameOfLifeSketch extends Sketch {
   public sketchDescription: string = 'Recreation of Conway\'s Game of Life';
 
   readonly blockSize = 15;
-  private grid: boolean[][] = [];
+  private grid: boolean[][];
 
   protected setup(p: any): () => void {
     return () => {
+      this.grid = [];
       for(let x = 0; x < p.width / this.blockSize; x++) { // for each column
         this.grid[x] = [];
 

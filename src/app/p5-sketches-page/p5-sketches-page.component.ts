@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
@@ -10,12 +10,15 @@ import {SolarSystemSketch} from "./sketches/solar-system-sketch";
   templateUrl: './p5-sketches-page.component.html'
 })
 export class P5SketchesPageComponent implements OnInit {
-  private sketchCards: Sketch[] = [
+  public sketchCards: Sketch[] = [
     new DemoSketch(),
     new GameOfLifeSketch(),
     new SolarSystemSketch(),
   ];
-  private cardsEnabled = true;
+  public cardsEnabled = true;
+  public currentSketch: Sketch;
+
+  @ViewChild('.p5Canvas') private canvas: any;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
@@ -29,6 +32,9 @@ export class P5SketchesPageComponent implements OnInit {
   }
 
   private loadSketchByName(sketchName: string): void {
+    if(this.currentSketch) {
+      this.currentSketch.remove();
+    }
     for(let sketch of this.sketchCards) {
       if(sketch.sketchName == sketchName) {
         this.loadSketch(sketch);
@@ -38,5 +44,14 @@ export class P5SketchesPageComponent implements OnInit {
 
   private loadSketch(sketch: Sketch): void {
     sketch.init();
+    this.currentSketch = sketch;
+  }
+
+  public refreshBtn(): void {
+    this.loadSketchByName(this.currentSketch.sketchName);
+  }
+
+  public screenshotBtn(): void {
+    this.currentSketch.saveScreenshot();
   }
 }
