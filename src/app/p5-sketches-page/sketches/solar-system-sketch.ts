@@ -12,11 +12,15 @@ export class SolarSystemSketch extends Sketch {
   private accelerationFactor = 500000;
 
   private dragging: boolean = false;
-  private origin: Vector = {x: 0, y: 0};
-  private offset: Vector = {x: 0, y: 0};
+  private origin: Vector;
+  private offset: Vector;
 
   protected setup(p: any): () => void {
     return () => {
+      this.origin = {x: 0, y: 0};
+      this.offset = {x: 0, y: 0};
+      this.dragging = false;
+
       this.bodies = [];
       for(let i = 0; i < 1000; i++) {
         let randomPosition = {x: Math.random() * p.width, y: Math.random() * p.height};
