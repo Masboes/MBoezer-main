@@ -4,8 +4,8 @@ import {del} from "selenium-webdriver/http";
 export class SolarSystemSketch extends Sketch {
   public sketchName: string = 'solar-system-sketch';
   public sketchTitle: string = 'Solar System Sketch';
-  public sketchImage: string = '/assets/images/sketches/demo-sketch.png';
-  public sketchDescription: string = 'Demo sketch to test the system.';
+  public sketchImage: string = '/assets/images/sketches/solar-system-sketch.jpg';
+  public sketchDescription: string = 'Simulation of gravitational bodies';
 
   private bodies: GravitationalBody[];
   private deltaTime = 0.01;
