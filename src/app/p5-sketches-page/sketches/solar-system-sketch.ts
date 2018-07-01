@@ -14,19 +14,22 @@ export class SolarSystemSketch extends Sketch {
   private dragging: boolean = false;
   private origin: Vector;
   private offset: Vector;
+  private zoomLevel: number;
 
   protected setup(p: any): () => void {
     return () => {
       this.origin = {x: 0, y: 0};
       this.offset = {x: 0, y: 0};
       this.dragging = false;
+      this.zoomLevel = 1.0;
 
       this.bodies = [];
       for(let i = 0; i < 1000; i++) {
-        let randomPosition = {x: Math.random() * p.width, y: Math.random() * p.height};
-        let randomColor = {r: Math.random()*255, g: Math.random()*255, b: Math.random()*255};
-        let randomMass = Math.random() * 20;
-        this.bodies.push(new GravitationalBody(randomMass, randomColor, randomPosition));
+        let position = this.randomVector(this.origin, Math.min(p.width, p.height) / 2);
+        let velocity = this.randomVector({x: 0, y: 0}, 0.0005);
+        let color = {r: Math.random()*255, g: Math.random()*255, b: Math.random()*255};
+        let randomMass = Math.random() * 10;
+        this.bodies.push(new GravitationalBody(randomMass, color, position, velocity));
       }
 
       p.frameRate(1 / this.deltaTime);
@@ -39,12 +42,13 @@ export class SolarSystemSketch extends Sketch {
 
       if (this.dragging) {
         this.origin = {
-          x: p.mouseX + this.offset.x,
-          y: p.mouseY + this.offset.y,
+          x: p.mouseX/this.zoomLevel + this.offset.x,
+          y: p.mouseY/this.zoomLevel + this.offset.y,
         };
       }
+      p.translate(p.width/2, p.height/2);
+      p.scale(this.zoomLevel);
       p.translate(this.origin.x, this.origin.y);
-
 
       for(let i = 0; i < this.bodies.length; i++) {
         let body = this.bodies[i];
@@ -65,8 +69,28 @@ export class SolarSystemSketch extends Sketch {
   protected mousePressed(p: any): () => void {
     return () => {
       this.dragging = true;
-      this.offset = {x: this.origin.x - p.mouseX, y: this.origin.y - p.mouseY};
+      this.offset = {x: this.origin.x - p.mouseX/this.zoomLevel, y: this.origin.y - p.mouseY/this.zoomLevel};
     }
+  }
+
+  protected mouseWheel(p: any): (any) => void {
+    return (event) => {
+      this.zoomLevel -= 0.005 * event.delta;
+      return false;
+    }
+  }
+
+  private randomVector(center: Vector, range: number): Vector {
+    let position = {
+      x: center.x + (2 * Math.random() - 1) * range,
+      y: center.y + (2 * Math.random() - 1) * range,
+    };
+    while(((center.x - position.x)**2 + (center.y - position.y)**2)**0.5 > range) {
+      position.x = center.x + (2 * Math.random() - 1) * range;
+      position.y = center.y + (2 * Math.random() - 1) * range;
+    }
+
+    return position;
   }
 }
 
