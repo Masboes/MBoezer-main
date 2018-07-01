@@ -24,6 +24,10 @@ import {
   MatSlideToggleModule,
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormComponent} from "./form/form.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {NgPipesModule} from "ngx-pipes";
+import {MdlDirective} from "../directives/mdl-directive";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -40,7 +44,9 @@ const appRoutes: Routes = [
     ToolbarComponent,
     P5SketchesPageComponent,
     HomePageComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    FormComponent,
+    MdlDirective,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,8 @@ const appRoutes: Routes = [
     MatButtonToggleModule,
     MatSelectModule,
     MatSlideToggleModule,
+    ReactiveFormsModule,
+    NgPipesModule,
   ],
   exports: [
     MatDialogModule,

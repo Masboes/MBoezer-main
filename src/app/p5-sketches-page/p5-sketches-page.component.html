@@ -11,18 +11,21 @@
         Open
       </a>
     </div>
-    <!--<div class="mdl-card__menu">-->
-      <!--<button mat-icon-button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect" matTooltip="Get share link">-->
-        <!--<i class="material-icons">share</i>-->
-      <!--</button>-->
-    <!--</div>-->
   </div>
 </div>
 
 <div id="sketch-buttons" *ngIf="!cardsEnabled">
   <button mat-fab class="sketch-button-right-top" color="primary" (click)="refreshBtn()" matTooltip="Refresh"><mat-icon>refresh</mat-icon></button>
-  <button mat-fab class="sketch-button-right-bottom" color="accent" (click)="refreshBtn()" matTooltip="Settings"><mat-icon>settings</mat-icon></button>
+  <button mat-fab class="sketch-button-right-bottom" color="accent" (click)="settingsBtn()" matTooltip="Settings"><mat-icon>settings</mat-icon></button>
   <button mat-fab class="sketch-button-left-bottom" color="primary" (click)="screenshotBtn()" matTooltip="Screenshot"><mat-icon>camera_alt</mat-icon></button>
 </div>
 
+<div [hidden]="!sketchSettingsVisible" class="settings-button-form mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__supporting-text">
+    <app-form *ngIf="form" [form]="form" (valueChanges)="sketchSettingsChange($event)"></app-form>
+  </div>
+</div>
+
 <div id="sketch-holder"></div>
+
+

@@ -18,6 +18,8 @@ export class P5SketchesPageComponent implements OnInit {
   public cardsEnabled = true;
   public currentSketch: Sketch;
 
+  public sketchSettingsVisible: boolean = false;
+
   @ViewChild('.p5Canvas') private canvas: any;
 
   constructor(private activatedRoute: ActivatedRoute) { }
@@ -53,5 +55,13 @@ export class P5SketchesPageComponent implements OnInit {
 
   public screenshotBtn(): void {
     this.currentSketch.saveScreenshot();
+  }
+
+  public settingsBtn(): void {
+    this.sketchSettingsVisible = !this.sketchSettingsVisible;
+  }
+
+  public sketchSettingsChange(event: any): void {
+
   }
 }
