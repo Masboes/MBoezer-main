@@ -23,8 +23,6 @@ export class P5SketchesPageComponent implements OnInit {
   public sketchSettingsVisible: boolean = false; // whether the settings form is opened
   public form : Form|null; // settings form
 
-  @ViewChild('.p5Canvas') private canvas: any;
-
   constructor(private activatedRoute: ActivatedRoute, private formFactory: FormFactory) { }
 
   ngOnInit() {
