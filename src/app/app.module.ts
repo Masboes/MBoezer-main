@@ -2,12 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { P5SketchesPageComponent } from './p5-sketches-page/p5-sketches-page.component';
-import {RouterModule, Routes} from "@angular/router";
-import { HomePageComponent } from './home-page/home-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
 import {
   MatDialogModule,
   MatButtonModule,
@@ -24,11 +18,17 @@ import {
   MatSlideToggleModule,
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormComponent} from "./form/form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgPipesModule} from "ngx-pipes";
 import {MdlDirective} from "../directives/mdl-directive";
-import {FormFactory} from "../form/form-factory";
+import {FormFactory} from "../models/form/form-factory";
+import {RouterModule, Routes} from "@angular/router";
+import {HomePageComponent} from "../components/home-page/home-page.component";
+import {P5SketchesPageComponent} from "../components/p5-sketches-page/p5-sketches-page.component";
+import {AboutPageComponent} from "../components/about-page/about-page.component";
+import {SidebarComponent} from "../components/sidebar/sidebar.component";
+import {ToolbarComponent} from "../components/toolbar/toolbar.component";
+import {FormComponent} from "../components/form/form.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},

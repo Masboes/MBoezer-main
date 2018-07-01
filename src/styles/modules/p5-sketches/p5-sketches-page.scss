@@ -1,0 +1,80 @@
+#sketch-holder {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sketch-buttons-holder > button {
+  z-index: 1;
+}
+
+.mboezer-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+  margin: 1rem;
+  float: left;
+  position: relative;
+}
+.mboezer-card-square > .mdl-card__title {
+  color: white;
+  background: #46B6AC;
+  padding: 0;
+  align-items: flex-end;
+  background-size: cover;
+}
+
+.mboezer-card-square.mdl-card:hover {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
+}
+
+.mboezer-card-square > .mdl-card__menu {
+  color: white;
+}
+
+.mboezer-card-square > .mdl-card__supporting-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mboezer-title-container {
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  vertical-align: center;
+}
+
+.mboezer-title-container > .mdl-card__title-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 15px;
+}
+
+.sketch-button-right-top {
+  position: absolute !important;
+  right: 2rem;
+  top: 2rem;
+}
+
+.sketch-button-right-bottom {
+  position: absolute !important;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.sketch-button-left-top {
+  position: absolute !important;
+  left: 2rem;
+  top: 2rem;
+}
+
+.sketch-button-left-bottom {
+  position: absolute !important;
+  left: 2rem;
+  bottom: 2rem;
+}
+
