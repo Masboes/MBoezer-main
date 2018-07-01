@@ -52,6 +52,10 @@ export abstract class Sketch {
       p.mouseReleased = () => {
         me.mouseReleased(p)();
       };
+
+      p.mouseWheel = (event) => {
+        me.mouseWheel(p)(event);
+      }
     };
 
   }
@@ -66,6 +70,10 @@ export abstract class Sketch {
   }
   protected mouseReleased(p: any): () => void {
     return () => {};
+  }
+
+  protected mouseWheel(p: any): (any) => void {
+    return (event) => {};
   }
 
   private getScreenshotFileName(): string {
