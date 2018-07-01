@@ -20,8 +20,8 @@ export class P5SketchesPageComponent implements OnInit {
   public cardsEnabled = true;
   public currentSketch: Sketch;
 
-  public sketchSettingsVisible: boolean = false;
-  public form : Form|null;
+  public sketchSettingsVisible: boolean = false; // whether the settings form is opened
+  public form : Form|null; // settings form
 
   @ViewChild('.p5Canvas') private canvas: any;
 
@@ -66,11 +66,5 @@ export class P5SketchesPageComponent implements OnInit {
 
   public settingsBtn(): void {
     this.sketchSettingsVisible = !this.sketchSettingsVisible;
-  }
-
-  public sketchSettingsChange(event: any): void {
-    if(this.currentSketch) {
-      this.currentSketch.updateSettings(event);
-    }
   }
 }
