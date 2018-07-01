@@ -49,7 +49,7 @@ export class SolarSystemSketch extends Sketch {
       p.translate(p.width/2, p.height/2);
       p.scale(this.zoomLevel);
       p.translate(this.origin.x, this.origin.y);
-      
+
       for(let i = 0; i < this.bodies.length; i++) {
         let body = this.bodies[i];
         if(body && body.active){

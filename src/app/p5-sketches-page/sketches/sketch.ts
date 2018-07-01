@@ -47,14 +47,17 @@ export abstract class Sketch {
 
       p.mousePressed = () => {
         me.mousePressed(p)();
+        return false;
       };
 
       p.mouseReleased = () => {
         me.mouseReleased(p)();
+        return false;
       };
 
       p.mouseWheel = (event) => {
         me.mouseWheel(p)(event);
+        return false;
       }
     };
 
