@@ -36,25 +36,28 @@ export class P5SketchesPageComponent implements OnInit {
     })
   }
 
-  private loadSketchByName(sketchName: string): void {
+  private loadSketchByName(sketchName: string, updateSettings = true): void {
     if(this.currentSketch) {
       this.currentSketch.remove();
     }
     for(let sketch of this.sketchCards) {
       if(sketch.sketchName == sketchName) {
-        this.loadSketch(sketch);
+        this.loadSketch(sketch, updateSettings);
       }
     }
   }
 
-  private loadSketch(sketch: Sketch): void {
+  private loadSketch(sketch: Sketch, updateSettings=true): void {
     sketch.init();
     this.currentSketch = sketch;
-    this.form = this.currentSketch.getSettingsForm(this.formFactory)
+
+    if(updateSettings){
+      this.form = this.currentSketch.getSettingsForm(this.formFactory);
+    }
   }
 
   public refreshBtn(): void {
-    this.loadSketchByName(this.currentSketch.sketchName);
+    this.loadSketchByName(this.currentSketch.sketchName, false);
   }
 
   public screenshotBtn(): void {
