@@ -55,7 +55,7 @@ export class P5SketchesPageComponent implements OnInit {
     }
   }
 
-  private loadSketchByName(sketchName: string, updateSettings = true): void {
+  private loadSketchByName(sketchName: string, updateSettings=true): void {
     if(this.currentSketch) {
       this.currentSketch.remove();
     }
