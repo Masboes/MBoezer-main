@@ -1,16 +1,15 @@
 import {FormGroup, FormBuilder as AngularFormBuilder, Validators} from '@angular/forms';
-import {FormType} from '../enums/form-type';
-import {FormField} from '../interfaces/form-field';
-import {BaseFormOptions} from '../interfaces/base-form-options';
-import {ChoiceFormOptions} from '../interfaces/choice-form-options';
+import {FormType} from '../../enums/form/form-type';
+import {FormField} from '../../interfaces/form/form-field';
+import {BaseFormOptions} from '../../interfaces/form/base-form-options';
+import {ChoiceFormOptions} from '../../interfaces/form/choice-form-options';
 import {Form} from './form';
-import {SliderFormOptions} from '../interfaces/slider-form-options';
+import {SliderFormOptions} from '../../interfaces/form/slider-form-options';
 
 export class FormBuilder {
   private fields: FormField[] = [];
 
-  constructor(private fb: AngularFormBuilder, private name: string) {
-  }
+  constructor(private fb: AngularFormBuilder, private name: string) { }
 
   public addTextField(name: string, defaultValue: string, options: BaseFormOptions): FormBuilder {
     this.addField(name, FormType.Text, defaultValue, options);

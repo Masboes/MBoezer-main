@@ -1,4 +1,4 @@
-import {FormType} from '../enums/form-type';
+import {FormType} from '../../enums/form/form-type';
 import {BaseFormOptions} from './base-form-options';
 import {ChoiceFormOptions} from './choice-form-options';
 import {FormControl} from '@angular/forms';

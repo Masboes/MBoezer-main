@@ -21,7 +21,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgPipesModule} from "ngx-pipes";
 import {MdlDirective} from "../directives/mdl-directive";
-import {FormFactory} from "../form/form-factory";
+import {FormFactory} from "../models/form/form-factory";
 import {RouterModule, Routes} from "@angular/router";
 import {HomePageComponent} from "../components/home-page/home-page.component";
 import {P5SketchesPageComponent} from "../components/p5-sketches-page/p5-sketches-page.component";

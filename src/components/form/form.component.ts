@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Form} from '../../form/form';
-import {FormType} from '../../enums/form-type';
+import {Form} from '../../models/form/form';
+import {FormType} from '../../enums/form/form-type';
 import {debounceTime} from "rxjs/operators";
-import {ChoiceFormOptions} from '../../interfaces/choice-form-options';
-import {FormField} from '../../interfaces/form-field';
-import {SliderFormOptions} from '../../interfaces/slider-form-options';
+import {ChoiceFormOptions} from '../../interfaces/form/choice-form-options';
+import {FormField} from '../../interfaces/form/form-field';
+import {SliderFormOptions} from '../../interfaces/form/slider-form-options';
 
 @Component({
   selector: 'app-form',

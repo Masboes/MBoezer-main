@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
-import {DemoSketch} from "./sketches/demo-sketch";
-import {Sketch} from "./sketches/sketch";
-import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
-import {SolarSystemSketch} from "./sketches/solar-system-sketch";
-import {FormFactory} from "../../form/form-factory";
-import {Form} from "../../form/form";
+import {DemoSketch} from "../../models/sketches/demo-sketch/demo-sketch";
+import {Sketch} from "../../models/sketches/sketch";
+import {GameOfLifeSketch} from "../../models/sketches/game-of-life/game-of-life-sketch";
+import {SolarSystemSketch} from "../../models/sketches/solar-system/solar-system-sketch";
+import {FormFactory} from "../../models/form/form-factory";
+import {Form} from "../../models/form/form";
 
 @Component({
   selector: 'app-p5-sketches-page',

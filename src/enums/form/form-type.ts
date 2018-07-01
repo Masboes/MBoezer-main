@@ -1,4 +1,3 @@
-
 export enum FormType {
     Text,
     Number,

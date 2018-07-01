@@ -1,6 +1,6 @@
-import {Sketch} from "./sketch";
-import {FormFactory} from "../../../form/form-factory";
-import {Form} from "../../../form/form";
+import {Sketch} from "../sketch";
+import {FormFactory} from "../../form/form-factory";
+import {Form} from "../../form/form";
 
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';

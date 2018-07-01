@@ -1,5 +1,5 @@
 import {FormGroup} from '@angular/forms';
-import {FormField} from '../interfaces/form-field';
+import {FormField} from '../../interfaces/form/form-field';
 import {Subject} from "rxjs/internal/Subject";
 import {Observable} from "rxjs/internal/Observable";
 

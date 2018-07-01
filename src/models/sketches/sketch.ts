@@ -1,5 +1,5 @@
-import {FormFactory} from "../../../form/form-factory";
-import {Form} from "../../../form/form";
+import {FormFactory} from "../form/form-factory";
+import {Form} from "../form/form";
 
 declare let p5;
 
