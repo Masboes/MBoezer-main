@@ -1,5 +1,7 @@
 import {Sketch} from "./sketch";
 import {del} from "selenium-webdriver/http";
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
 
 export class SolarSystemSketch extends Sketch {
   public sketchName: string = 'solar-system-sketch';
@@ -91,6 +93,12 @@ export class SolarSystemSketch extends Sketch {
     }
 
     return position;
+  }
+
+  protected getSettingsForm(formFactory: FormFactory): Form {
+    return formFactory.createFormBuilder()
+      .addToggleField('test', false, {label: 'test-toggle'})
+      .getForm();
   }
 }
 

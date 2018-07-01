@@ -28,6 +28,7 @@ import {FormComponent} from "./form/form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgPipesModule} from "ngx-pipes";
 import {MdlDirective} from "../directives/mdl-directive";
+import {FormFactory} from "../form/form-factory";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -83,7 +84,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatSlideToggleModule,
   ],
-  providers: [],
+  providers: [FormFactory],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

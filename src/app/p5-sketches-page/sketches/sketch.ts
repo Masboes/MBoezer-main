@@ -1,3 +1,6 @@
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
+
 declare let p5;
 
 export abstract class Sketch {
@@ -66,6 +69,8 @@ export abstract class Sketch {
   // mandatory overwrite
   protected abstract setup(p: any): () => void;
   protected abstract draw(p: any): () => void;
+  public abstract getSettingsForm(formFactory: FormFactory): Form;
+
 
   // optional overwrite
   protected mousePressed(p: any): () => void {

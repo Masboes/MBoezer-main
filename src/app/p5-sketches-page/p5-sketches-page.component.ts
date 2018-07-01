@@ -4,6 +4,8 @@ import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
 import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
 import {SolarSystemSketch} from "./sketches/solar-system-sketch";
+import {FormFactory} from "../../form/form-factory";
+import {Form} from "../../form/form";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -19,10 +21,11 @@ export class P5SketchesPageComponent implements OnInit {
   public currentSketch: Sketch;
 
   public sketchSettingsVisible: boolean = false;
+  public form : Form|null;
 
   @ViewChild('.p5Canvas') private canvas: any;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private formFactory: FormFactory) { }
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
@@ -47,6 +50,7 @@ export class P5SketchesPageComponent implements OnInit {
   private loadSketch(sketch: Sketch): void {
     sketch.init();
     this.currentSketch = sketch;
+    this.form = this.currentSketch.getSettingsForm(this.formFactory)
   }
 
   public refreshBtn(): void {
