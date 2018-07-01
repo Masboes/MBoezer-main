@@ -1,4 +1,3 @@
-
 import {FormType} from '../enums/form-type';
 import {BaseFormOptions} from './base-form-options';
 import {ChoiceFormOptions} from './choice-form-options';

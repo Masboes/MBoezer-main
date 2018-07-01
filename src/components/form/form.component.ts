@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Form} from '../../form/form';
 import {FormType} from '../../enums/form-type';
 import {debounceTime} from "rxjs/operators";

@@ -5,7 +5,6 @@ declare var componentHandler: any;
   selector: '[mdl]',
 })
 export class MdlDirective implements OnInit {
-
   @Input() private mdl;
 
   constructor() {
@@ -16,5 +15,4 @@ export class MdlDirective implements OnInit {
       componentHandler.upgradeDom();
     });
   }
-
 }

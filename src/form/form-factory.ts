@@ -4,7 +4,6 @@ import {FormBuilder as AngularFormBuilder} from '@angular/forms';
 
 @Injectable()
 export class FormFactory {
-
     private numberOfForms: number = 0;
 
     constructor (private fb: AngularFormBuilder) {
@@ -13,5 +12,4 @@ export class FormFactory {
     public createFormBuilder(name: string = String(++this.numberOfForms)): FormBuilder {
         return new FormBuilder(this.fb, name);
     }
-
 }

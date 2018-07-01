@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
