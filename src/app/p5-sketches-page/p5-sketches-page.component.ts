@@ -66,6 +66,8 @@ export class P5SketchesPageComponent implements OnInit {
   }
 
   public sketchSettingsChange(event: any): void {
-
+    if(this.currentSketch) {
+      this.currentSketch.updateSettings(event);
+    }
   }
 }

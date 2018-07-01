@@ -12,7 +12,7 @@ import {SliderFormOptions} from '../../interfaces/slider-form-options';
 })
 export class FormComponent implements OnInit {
   @Input() public form: Form;
-  @Input() private debounceTime: number = 500; // time to wait when the user has changed something
+  @Input() private debounceTime: number = 100; // time to wait when the user has changed something
   @Output() private valueChanges: EventEmitter<object> = new EventEmitter<object>();
 
   // fix for Angular templating enums

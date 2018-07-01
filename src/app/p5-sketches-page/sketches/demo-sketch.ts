@@ -1,4 +1,6 @@
 import {Sketch} from "./sketch";
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
 
 export class DemoSketch extends Sketch {
   public sketchName: string = 'demo-sketch';
@@ -21,5 +23,10 @@ export class DemoSketch extends Sketch {
       }
       p.ellipse(p.mouseX, p.mouseY, 80, 80);
     }
+  }
+
+  public getSettingsForm(formFactory: FormFactory): Form {
+    return formFactory.createFormBuilder()
+      .getForm();
   }
 }

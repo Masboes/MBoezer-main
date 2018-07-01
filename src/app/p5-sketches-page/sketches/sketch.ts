@@ -50,12 +50,12 @@ export abstract class Sketch {
 
       p.mousePressed = () => {
         me.mousePressed(p)();
-        return false;
+        //return false;
       };
 
       p.mouseReleased = () => {
         me.mouseReleased(p)();
-        return false;
+        ///return false;
       };
 
       p.mouseWheel = (event) => {
@@ -70,7 +70,7 @@ export abstract class Sketch {
   protected abstract setup(p: any): () => void;
   protected abstract draw(p: any): () => void;
   public abstract getSettingsForm(formFactory: FormFactory): Form;
-
+  public abstract updateSettings(settings: any): void;
 
   // optional overwrite
   protected mousePressed(p: any): () => void {

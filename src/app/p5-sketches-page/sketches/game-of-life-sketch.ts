@@ -1,4 +1,6 @@
 import {Sketch} from "./sketch";
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
 
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';
@@ -28,6 +30,11 @@ export class GameOfLifeSketch extends Sketch {
       this.updateGrid(p);
       this.drawGrid(p);
     }
+  }
+
+  public getSettingsForm(formFactory: FormFactory): Form {
+    return formFactory.createFormBuilder()
+      .getForm();
   }
 
   private updateGrid(p: any) {
