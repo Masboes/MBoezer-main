@@ -11,10 +11,14 @@ export class SolarSystemSketch extends Sketch {
   public sketchDescription: string = 'Simulation of gravitational bodies';
 
   private bodies: GravitationalBody[];
-  private deltaTime = 0.01;
+  private deltaTime = 0.01; // goal frametime, often lower due to processing time
+
+  // variables that are changed by settings
   private accelerationFactor = 5e5;
   private pause: boolean = false;
+  private startBodies: number = 1000;
 
+  // moving and zooming related
   private dragging: boolean = false;
   private origin: SketchVector;
   private offset: SketchVector;
@@ -29,7 +33,7 @@ export class SolarSystemSketch extends Sketch {
       this.zoomLevel = 1.0;
 
       this.bodies = [];
-      for(let i = 0; i < 1000; i++) {
+      for(let i = 0; i < this.startBodies; i++) {
         let position = this.randomVector(this.origin, Math.min(p.width, p.height) / 2);
         let velocity = this.randomVector({x: 0, y: 0}, 0.0005);
         let color = {r: Math.random()*255, g: Math.random()*255, b: Math.random()*255};
@@ -105,19 +109,14 @@ export class SolarSystemSketch extends Sketch {
     return formFactory.createFormBuilder()
       .addToggleField('pause', false, {label: 'Pause'})
       .addSliderField('accelerationFactor', 50, {label: 'Acceleration factor', min: 1, max: 100 })
+      .addSliderField('startBodies', 99, {label: 'Number of bodies', min: 10, max: 2000 })
       .getForm();
   }
 
   public updateSettings(settings: any): void {
-    if(settings['accelerationFactor']) {
-      this.accelerationFactor = +settings['accelerationFactor'] * 1e4;
-    }
-
-    if(settings['pause']) {
-      this.pause = settings['pause'];
-    } else {
-      this.pause = false;
-    }
+    this.accelerationFactor = +settings['accelerationFactor'] * 1e4;
+    this.pause = settings['pause'];
+    this.startBodies = settings['startBodies']
   }
 
 }
