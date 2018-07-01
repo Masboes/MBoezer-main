@@ -29,4 +29,8 @@ export class DemoSketch extends Sketch {
     return formFactory.createFormBuilder()
       .getForm();
   }
+
+  public updateSettings(settings: any): void {
+
+  }
 }
