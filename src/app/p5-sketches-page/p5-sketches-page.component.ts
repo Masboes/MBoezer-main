@@ -23,7 +23,7 @@ export class P5SketchesPageComponent implements OnInit {
   public sketchSettingsVisible: boolean = false; // whether the settings form is opened
   public form : Form|null; // settings form
 
-  constructor(private activatedRoute: ActivatedRoute, private formFactory: FormFactory) { }
+  constructor(private formFactory: FormFactory, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
@@ -32,26 +32,6 @@ export class P5SketchesPageComponent implements OnInit {
         this.loadSketchByName(params['sketch']);
       }
     })
-  }
-
-  private loadSketchByName(sketchName: string, updateSettings = true): void {
-    if(this.currentSketch) {
-      this.currentSketch.remove();
-    }
-    for(let sketch of this.sketchCards) {
-      if(sketch.sketchName == sketchName) {
-        this.loadSketch(sketch, updateSettings);
-      }
-    }
-  }
-
-  private loadSketch(sketch: Sketch, updateSettings=true): void {
-    sketch.init();
-    this.currentSketch = sketch;
-
-    if(updateSettings){
-      this.form = this.currentSketch.getSettingsForm(this.formFactory);
-    }
   }
 
   public refreshBtn(): void {
@@ -64,5 +44,25 @@ export class P5SketchesPageComponent implements OnInit {
 
   public settingsBtn(): void {
     this.sketchSettingsVisible = !this.sketchSettingsVisible;
+  }
+
+  private loadSketch(sketch: Sketch, updateSettings=true): void {
+    sketch.init();
+    this.currentSketch = sketch;
+
+    if(updateSettings){
+      this.form = this.currentSketch.getSettingsForm(this.formFactory);
+    }
+  }
+
+  private loadSketchByName(sketchName: string, updateSettings = true): void {
+    if(this.currentSketch) {
+      this.currentSketch.remove();
+    }
+    for(let sketch of this.sketchCards) {
+      if(sketch.sketchName == sketchName) {
+        this.loadSketch(sketch, updateSettings);
+      }
+    }
   }
 }
