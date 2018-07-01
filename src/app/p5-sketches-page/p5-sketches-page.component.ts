@@ -4,6 +4,8 @@ import {DemoSketch} from "./sketches/demo-sketch";
 import {Sketch} from "./sketches/sketch";
 import {GameOfLifeSketch} from "./sketches/game-of-life-sketch";
 import {SolarSystemSketch} from "./sketches/solar-system-sketch";
+import {FormFactory} from "../../form/form-factory";
+import {Form} from "../../form/form";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -18,9 +20,12 @@ export class P5SketchesPageComponent implements OnInit {
   public cardsEnabled = true;
   public currentSketch: Sketch;
 
+  public sketchSettingsVisible: boolean = false;
+  public form : Form|null;
+
   @ViewChild('.p5Canvas') private canvas: any;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private formFactory: FormFactory) { }
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
@@ -31,27 +36,41 @@ export class P5SketchesPageComponent implements OnInit {
     })
   }
 
-  private loadSketchByName(sketchName: string): void {
+  private loadSketchByName(sketchName: string, updateSettings = true): void {
     if(this.currentSketch) {
       this.currentSketch.remove();
     }
     for(let sketch of this.sketchCards) {
       if(sketch.sketchName == sketchName) {
-        this.loadSketch(sketch);
+        this.loadSketch(sketch, updateSettings);
       }
     }
   }
 
-  private loadSketch(sketch: Sketch): void {
+  private loadSketch(sketch: Sketch, updateSettings=true): void {
     sketch.init();
     this.currentSketch = sketch;
+
+    if(updateSettings){
+      this.form = this.currentSketch.getSettingsForm(this.formFactory);
+    }
   }
 
   public refreshBtn(): void {
-    this.loadSketchByName(this.currentSketch.sketchName);
+    this.loadSketchByName(this.currentSketch.sketchName, false);
   }
 
   public screenshotBtn(): void {
     this.currentSketch.saveScreenshot();
+  }
+
+  public settingsBtn(): void {
+    this.sketchSettingsVisible = !this.sketchSettingsVisible;
+  }
+
+  public sketchSettingsChange(event: any): void {
+    if(this.currentSketch) {
+      this.currentSketch.updateSettings(event);
+    }
   }
 }

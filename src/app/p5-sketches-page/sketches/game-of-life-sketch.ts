@@ -1,4 +1,6 @@
 import {Sketch} from "./sketch";
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
 
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';
@@ -6,7 +8,7 @@ export class GameOfLifeSketch extends Sketch {
   public sketchImage: string = '/assets/images/sketches/game-of-life-sketch.png';
   public sketchDescription: string = 'Recreation of Conway\'s Game of Life';
 
-  readonly blockSize = 15;
+  private blockSize = 15;
   private grid: boolean[][];
 
   protected setup(p: any): () => void {
@@ -27,6 +29,18 @@ export class GameOfLifeSketch extends Sketch {
       p.background(235);
       this.updateGrid(p);
       this.drawGrid(p);
+    }
+  }
+
+  public getSettingsForm(formFactory: FormFactory): Form {
+    return formFactory.createFormBuilder()
+      .addSliderField('blocksize', 15, {label: 'Block size', min: 10, max: 100})
+      .getForm();
+  }
+
+  public updateSettings(settings: any): void {
+    if(settings['blocksize']) {
+      this.blockSize = settings['blocksize'];
     }
   }
 

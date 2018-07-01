@@ -1,5 +1,7 @@
 import {Sketch} from "./sketch";
 import {del} from "selenium-webdriver/http";
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
 
 export class SolarSystemSketch extends Sketch {
   public sketchName: string = 'solar-system-sketch';
@@ -9,7 +11,8 @@ export class SolarSystemSketch extends Sketch {
 
   private bodies: GravitationalBody[];
   private deltaTime = 0.01;
-  private accelerationFactor = 500000;
+  private accelerationFactor = 5e5;
+  private pause: boolean = false;
 
   private dragging: boolean = false;
   private origin: Vector;
@@ -21,6 +24,7 @@ export class SolarSystemSketch extends Sketch {
       this.origin = {x: 0, y: 0};
       this.offset = {x: 0, y: 0};
       this.dragging = false;
+      this.pause = false;
       this.zoomLevel = 1.0;
 
       this.bodies = [];
@@ -53,7 +57,9 @@ export class SolarSystemSketch extends Sketch {
       for(let i = 0; i < this.bodies.length; i++) {
         let body = this.bodies[i];
         if(body && body.active){
-          body.update(this.bodies, this.deltaTime * this.accelerationFactor);
+          if(!this.pause){
+            body.update(this.bodies, this.deltaTime * this.accelerationFactor);
+          }
           body.draw(p);
         }
       }
@@ -76,6 +82,7 @@ export class SolarSystemSketch extends Sketch {
   protected mouseWheel(p: any): (any) => void {
     return (event) => {
       this.zoomLevel -= 0.005 * event.delta;
+      this.zoomLevel = Math.max(0, this.zoomLevel);
       return false;
     }
   }
@@ -92,6 +99,26 @@ export class SolarSystemSketch extends Sketch {
 
     return position;
   }
+
+  public getSettingsForm(formFactory: FormFactory): Form {
+    return formFactory.createFormBuilder()
+      .addToggleField('pause', false, {label: 'Pause'})
+      .addSliderField('accelerationFactor', 50, {label: 'Acceleration factor', min: 1, max: 100 })
+      .getForm();
+  }
+
+  public updateSettings(settings: any): void {
+    if(settings['accelerationFactor']) {
+      this.accelerationFactor = +settings['accelerationFactor'] * 1e4;
+    }
+
+    if(settings['pause']) {
+      this.pause = settings['pause'];
+    } else {
+      this.pause = false;
+    }
+  }
+
 }
 
 class GravitationalBody {

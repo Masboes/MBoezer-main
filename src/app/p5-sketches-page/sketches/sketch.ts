@@ -1,3 +1,6 @@
+import {FormFactory} from "../../../form/form-factory";
+import {Form} from "../../../form/form";
+
 declare let p5;
 
 export abstract class Sketch {
@@ -47,12 +50,12 @@ export abstract class Sketch {
 
       p.mousePressed = () => {
         me.mousePressed(p)();
-        return false;
+        //return false;
       };
 
       p.mouseReleased = () => {
         me.mouseReleased(p)();
-        return false;
+        ///return false;
       };
 
       p.mouseWheel = (event) => {
@@ -66,6 +69,8 @@ export abstract class Sketch {
   // mandatory overwrite
   protected abstract setup(p: any): () => void;
   protected abstract draw(p: any): () => void;
+  public abstract getSettingsForm(formFactory: FormFactory): Form;
+  public abstract updateSettings(settings: any): void;
 
   // optional overwrite
   protected mousePressed(p: any): () => void {
