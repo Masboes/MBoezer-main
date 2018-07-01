@@ -1,7 +1,7 @@
 import {FormFactory} from "../form/form-factory";
 import {Form} from "../form/form";
 
-declare let p5;
+declare let p5; // imported in scripts
 
 export abstract class Sketch {
   public abstract sketchName: string;
@@ -9,9 +9,9 @@ export abstract class Sketch {
   public abstract sketchImage: string;
   public abstract sketchDescription: string;
 
-  private holderId: string = 'sketch-holder';
-
   protected p5; // declare it to please typescript
+
+  private readonly holderId: string = 'sketch-holder';
 
   public init(): void {
     let holder = document.querySelector('#' + this.holderId);
@@ -67,10 +67,10 @@ export abstract class Sketch {
   }
 
   // mandatory overwrite
-  protected abstract setup(p: any): () => void;
-  protected abstract draw(p: any): () => void;
-  public abstract getSettingsForm(formFactory: FormFactory): Form;
-  public abstract updateSettings(settings: any): void;
+  protected abstract setup(p: any): () => void; // called at start of sketch
+  protected abstract draw(p: any): () => void; // called at each frame
+  public abstract getSettingsForm(formFactory: FormFactory): Form; // generates the settings form
+  public abstract updateSettings(settings: any): void; // called when settings change
 
   // optional overwrite
   protected mousePressed(p: any): () => void {
@@ -79,11 +79,11 @@ export abstract class Sketch {
   protected mouseReleased(p: any): () => void {
     return () => {};
   }
-
   protected mouseWheel(p: any): (any) => void {
     return (event) => {};
   }
 
+  // util functions
   private getScreenshotFileName(): string {
     return 'screenshot-' + (new Date().toISOString()) + '.png';
   }
