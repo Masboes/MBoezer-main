@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div id="sketch-buttons" *ngIf="!cardsEnabled && currentSketch">
+<div class="sketch-buttons-holder" *ngIf="!cardsEnabled && currentSketch">
   <button mat-fab class="sketch-button-right-top" color="primary" (click)="refreshBtn()" matTooltip="Refresh"><mat-icon>refresh</mat-icon></button>
   <button mat-fab class="sketch-button-right-bottom" color="accent" (click)="settingsBtn()" matTooltip="Settings"><mat-icon>settings</mat-icon></button>
   <button mat-fab class="sketch-button-left-bottom" color="primary" (click)="screenshotBtn()" matTooltip="Screenshot"><mat-icon>camera_alt</mat-icon></button>
