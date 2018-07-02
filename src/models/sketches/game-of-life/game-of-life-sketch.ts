@@ -14,11 +14,13 @@ export class GameOfLifeSketch extends Sketch {
   // editable by settings
   private blockSize = 15;
   private frameRate = 5;
+  private paused = false;
   private enableShadow = true;
 
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
       .addToggleField('enableShadow', this.enableShadow, {label: 'Enable shadow'})
+      .addToggleField('paused', this.paused, {label: 'Pause'})
       .addSliderField('blockSize', this.blockSize, {label: 'Block size', min: 10, max: 100})
       .addSliderField('frameRate', this.frameRate, {label: 'Updates per second', min: 1, max: 50 })
       .getForm();
@@ -27,7 +29,8 @@ export class GameOfLifeSketch extends Sketch {
   public updateSettings(settings: any): void {
     this.blockSize = settings['blockSize'];
     this.frameRate = settings['frameRate'];
-    this.enableShadow = settings['enableShadow']
+    this.enableShadow = settings['enableShadow'];
+    this.paused = settings['paused'];
   }
 
   protected setup(p: any): () => void {
@@ -37,7 +40,7 @@ export class GameOfLifeSketch extends Sketch {
         this.grid[x] = [];
 
         for(let y = 0; y < p.height / this.blockSize; y++) { // for each row
-          this.grid[x][y] = Math.random() >= 0.5;
+          this.grid[x][y] = Math.random() >= 0.5; // 50/50
         }
       }
     }
@@ -45,15 +48,15 @@ export class GameOfLifeSketch extends Sketch {
 
   protected draw(p: any): () => void {
     return () => {
-      p.background(235);
-
-      if(this.enableShadow) {
-        this.drawGrid(p, {r:200,g:200,b:200});
+      if(!this.paused){
+        p.background(235);
+        if(this.enableShadow) {
+          this.drawGrid(p, {r:200,g:200,b:200});
+        }
+        this.updateGrid(p);
+        this.drawGrid(p, {r:0,g:0,b:0});
+        p.frameRate(this.frameRate);
       }
-
-      this.updateGrid(p);
-      this.drawGrid(p, {r:0,g:0,b:0});
-      p.frameRate(this.frameRate);
     }
   }
 
