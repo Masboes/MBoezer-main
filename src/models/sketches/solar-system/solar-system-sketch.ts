@@ -36,7 +36,7 @@ export class SolarSystemSketch extends Sketch {
       for(let i = 0; i < this.startBodies; i++) {
         let position = this.randomVector(this.origin, Math.min(p.width, p.height) / 2);
         let velocity = this.randomVector({x: 0, y: 0}, 0.0005);
-        let color = {r: Math.random()*255, g: Math.random()*255, b: Math.random()*255};
+        let color = {r: Math.random()*155 + 100, g: Math.random()*155 + 100, b: Math.random()*155 + 100};
         let randomMass = Math.random() * 10;
         this.bodies.push(new GravitationalBody(randomMass, color, position, velocity));
       }
@@ -47,7 +47,7 @@ export class SolarSystemSketch extends Sketch {
 
   protected draw(p: any): () => void {
     return () => {
-      p.background(235);
+      p.background('rgba(0, 0, 0, 0.5)');
 
       if (this.dragging) {
         this.origin = {
