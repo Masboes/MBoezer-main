@@ -8,19 +8,22 @@ export class GameOfLifeSketch extends Sketch {
   public sketchImage: string = '/assets/images/sketches/game-of-life-sketch.png';
   public sketchDescription: string = 'Recreation of Conway\'s Game of Life';
 
-  private blockSize = 15;
   private grid: boolean[][];
+
+  // editable by settings
+  private blockSize = 15;
+  private frameRate = 5;
 
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
-      .addSliderField('blocksize', 15, {label: 'Block size', min: 10, max: 100})
+      .addSliderField('blocksize', this.blockSize, {label: 'Block size', min: 10, max: 100})
+      .addSliderField('frameRate', this.frameRate, {label: 'Updates per second', min: 1, max: 50 })
       .getForm();
   }
 
   public updateSettings(settings: any): void {
-    if(settings['blocksize']) {
-      this.blockSize = settings['blocksize'];
-    }
+    this.blockSize = settings['blocksize'];
+    this.frameRate = settings['frameRate'];
   }
 
   protected setup(p: any): () => void {
@@ -41,6 +44,7 @@ export class GameOfLifeSketch extends Sketch {
       p.background(235);
       this.updateGrid(p);
       this.drawGrid(p);
+      p.frameRate(this.frameRate);
     }
   }
 
