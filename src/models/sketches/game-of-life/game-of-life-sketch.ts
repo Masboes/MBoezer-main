@@ -1,6 +1,7 @@
 import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
+import {SketchColor} from "./sketch-color";
 
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';
@@ -13,17 +14,20 @@ export class GameOfLifeSketch extends Sketch {
   // editable by settings
   private blockSize = 15;
   private frameRate = 5;
+  private enableShadow = true;
 
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
-      .addSliderField('blocksize', this.blockSize, {label: 'Block size', min: 10, max: 100})
+      .addToggleField('enableShadow', this.enableShadow, {label: 'Enable shadow'})
+      .addSliderField('blockSize', this.blockSize, {label: 'Block size', min: 10, max: 100})
       .addSliderField('frameRate', this.frameRate, {label: 'Updates per second', min: 1, max: 50 })
       .getForm();
   }
 
   public updateSettings(settings: any): void {
-    this.blockSize = settings['blocksize'];
+    this.blockSize = settings['blockSize'];
     this.frameRate = settings['frameRate'];
+    this.enableShadow = settings['enableShadow']
   }
 
   protected setup(p: any): () => void {
@@ -42,13 +46,18 @@ export class GameOfLifeSketch extends Sketch {
   protected draw(p: any): () => void {
     return () => {
       p.background(235);
+
+      if(this.enableShadow) {
+        this.drawGrid(p, {r:200,g:200,b:200});
+      }
+
       this.updateGrid(p);
-      this.drawGrid(p);
+      this.drawGrid(p, {r:0,g:0,b:0});
       p.frameRate(this.frameRate);
     }
   }
 
-  private updateGrid(p: any) {
+  private updateGrid(p: any): void {
     let oldGrid = this.gridCopy();
 
     for(let x = 0; x < this.grid.length; x++) { // for each column
@@ -58,12 +67,12 @@ export class GameOfLifeSketch extends Sketch {
     }
   }
 
-  private drawGrid(p: any) {
+  private drawGrid(p: any, color: SketchColor): void {
     for(let x = 0; x < this.grid.length; x++) { // for each column
       for(let y = 0; y < this.grid[x].length; y++) { // for each row
         if(this.grid[x][y]) {
           p.noStroke();
-          p.fill(0);
+          p.fill(color.r, color.g, color.b);
           p.rect(x * this.blockSize + 1, y * this.blockSize + 1, this.blockSize - 2, this.blockSize - 2); // 1 px padding
         }
       }
