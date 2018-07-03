@@ -109,14 +109,14 @@ export class SolarSystemSketch extends Sketch {
     return formFactory.createFormBuilder()
       .addToggleField('pause', false, {label: 'Pause'})
       .addSliderField('accelerationFactor', 50, {label: 'Acceleration factor', min: 1, max: 100 })
-      .addSliderField('startBodies', 99, {label: 'Number of bodies', min: 10, max: 2000 })
+      .addSliderField('startBodies', 10, {label: 'Number of bodies', min: 1, max: 20 })
       .getForm();
   }
 
   public updateSettings(settings: any): void {
     this.accelerationFactor = +settings['accelerationFactor'] * 1e4;
     this.pause = settings['pause'];
-    this.startBodies = settings['startBodies']
+    this.startBodies = settings['startBodies'] * 1e2;
   }
 
 }

@@ -38,6 +38,9 @@ export abstract class Sketch {
         canvas.parent(this.holderId);
         p.canvas = canvas; // save canvas for outside usage
         me.setup(p)();
+
+        canvas.mousePressed(this.mousePressed(p));
+        canvas.mouseReleased(this.mouseReleased(p));
       };
 
       p.draw = () => {
@@ -46,16 +49,6 @@ export abstract class Sketch {
         }
 
         me.draw(p)();
-      };
-
-      p.mousePressed = () => {
-        me.mousePressed(p)();
-        //return false;
-      };
-
-      p.mouseReleased = () => {
-        me.mouseReleased(p)();
-        ///return false;
       };
 
       p.mouseWheel = (event) => {
