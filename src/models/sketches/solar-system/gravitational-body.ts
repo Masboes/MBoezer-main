@@ -10,11 +10,42 @@ export class GravitationalBody {
   public color: SketchColor;
   public active: boolean = true; // false if it has been absorbed
 
+  public forceSumX: number = 0;
+  public forceSumY: number = 0;
+
   constructor(mass: number, color: SketchColor, position: SketchVector, velocity: SketchVector = {x:0, y:0}) {
     this.mass = mass;
     this.color = color;
     this.position = position;
     this.velocity = velocity;
+  }
+
+  public calculateForces(start: number, bodies: GravitationalBody[]): void {
+    for(let i = start + 1; i < bodies.length; i++) {
+      if(bodies[i] != this && bodies[i].active){
+        let force = this.calculateForce(this, bodies[i]);
+        //console.log(force);
+        this.forceSumX += force.x;
+        this.forceSumY += force.y;
+
+        bodies[i].forceSumX -= force.x;
+        bodies[i].forceSumY -= force.y;
+
+        if(this.checkCollision(this, bodies[i]) && bodies[i].active && bodies[i] != this) {
+          this.absorb(bodies[i]);
+        }
+      }
+    }
+  }
+
+  public applyPhysics(deltaTime: number): void {
+    let acceleration = this.calculateAcceleration({x: this.forceSumX, y: this.forceSumY});
+    //console.log(acceleration);
+    this.applyAcceleration(acceleration, deltaTime);
+    this.applyVelocity(deltaTime);
+
+    this.forceSumX = 0;
+    this.forceSumY = 0;
   }
 
   public update(bodies: GravitationalBody[], deltaTime: number): void {
@@ -32,15 +63,16 @@ export class GravitationalBody {
     let acceleration = this.calculateAcceleration({x: forceSumX, y: forceSumY});
     this.applyAcceleration(acceleration, deltaTime);
     this.applyVelocity(deltaTime);
-
-    for(let body of bodies) {
-      if(this.checkCollision(this, body) && body.active && body != this) {
-        this.absorb(body);
-      }
-    }
   }
 
   public draw(p: any): void {
+    if(this.mass > 1000 && this.mass < 8000) {
+      this.color.r = 255 - (8000 - this.mass)/7000 * 130;
+      this.color.g = 255 - (8000 - this.mass)/7000 * 130;
+      this.color.b = (8000 - this.mass)/7000 * 130;
+    } else if (this.mass >= 8000) {
+      this.color = {r: 255, g: 255, b: 0}
+    }
     p.stroke(this.color.r, this.color.g, this.color.b);
     p.fill(this.color.r, this.color.g, this.color.b);
 
