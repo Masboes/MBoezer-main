@@ -2,7 +2,8 @@ import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
 import {Walker} from "./walker";
-import {SketchVector} from "../solar-system/sketch-vector";
+import {SketchVector} from "../sketch-vector";
+import {RandomType} from "./random-type";
 
 export class WalkerSketch extends Sketch {
   public sketchName: string = 'walker';
@@ -12,7 +13,8 @@ export class WalkerSketch extends Sketch {
 
   private walkers: Walker[];
 
-  private walkerCount = 1000;
+  private walkerCount = 500;
+  private randomType: RandomType = RandomType.Perlin;
 
   // moving and zooming related
   private dragging: boolean = false;
@@ -38,20 +40,21 @@ export class WalkerSketch extends Sketch {
 
       this.walkers = [];
       for(let i = 0; i < this.walkerCount; i++) {
-        this.walkers.push(new Walker(this.random2Vector({x: 0, y:0}, Math.min(p.height, p.width) / 4), this.randomColor()));
+        this.walkers.push(new Walker(this.random2Vector({x: 0, y:0}, Math.min(p.height, p.width) / 2), this.randomColor()));
       }
     }
   }
 
   protected draw(p: any): () => void {
     return () => {
-      p.background('rgba(255, 255, 255, 0.05)');
+      p.background('rgba(255, 255, 255, 0.01)');
 
       if (this.dragging) {
         this.origin = {
           x: p.mouseX/this.zoomLevel + this.offset.x,
           y: p.mouseY/this.zoomLevel + this.offset.y,
         };
+        p.background('rgba(255, 255, 255, 1.0)');
       }
       p.translate(p.width/2, p.height/2);
       p.scale(this.zoomLevel);
@@ -59,7 +62,21 @@ export class WalkerSketch extends Sketch {
 
 
       for(let walker of this.walkers) {
-        walker.update();
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
+        walker.draw(p);
+        walker.update(this.randomType, p);
         walker.draw(p);
       }
     }
@@ -82,6 +99,7 @@ export class WalkerSketch extends Sketch {
     return (event) => {
       this.zoomLevel -= 0.005 * event.delta;
       this.zoomLevel = Math.max(0, this.zoomLevel);
+      p.background('rgba(255, 255, 255, 1.0)');
       return false;
     }
   }
