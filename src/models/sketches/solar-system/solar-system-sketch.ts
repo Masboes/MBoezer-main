@@ -29,8 +29,8 @@ export class SolarSystemSketch extends Sketch {
       this.origin = {x: 0, y: 0};
       this.offset = {x: 0, y: 0};
       this.dragging = false;
-      this.pause = false;
       this.zoomLevel = 1.0;
+      this.pause = false;
 
       this.bodies = [];
       for(let i = 0; i < this.startBodies; i++) {

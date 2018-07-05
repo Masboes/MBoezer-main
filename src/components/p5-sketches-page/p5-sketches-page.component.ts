@@ -6,6 +6,7 @@ import {GameOfLifeSketch} from "../../models/sketches/game-of-life/game-of-life-
 import {SolarSystemSketch} from "../../models/sketches/solar-system/solar-system-sketch";
 import {FormFactory} from "../../models/form/form-factory";
 import {Form} from "../../models/form/form";
+import {WalkerSketch} from "../../models/sketches/walker/walker-sketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -16,6 +17,7 @@ export class P5SketchesPageComponent implements OnInit {
     new DemoSketch(),
     new GameOfLifeSketch(),
     new SolarSystemSketch(),
+    new WalkerSketch(),
   ];
   public cardsEnabled = true;
   public currentSketch: Sketch;
