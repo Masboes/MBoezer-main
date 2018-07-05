@@ -1,6 +1,7 @@
 import {FormFactory} from "../form/form-factory";
 import {Form} from "../form/form";
-import {SketchVector} from "./solar-system/sketch-vector";
+import {SketchVector} from "./sketch-vector";
+import {SketchColor} from "./sketch-color";
 
 declare let p5; // imported in scripts
 
@@ -82,7 +83,7 @@ export abstract class Sketch {
     return 'screenshot-' + (new Date().toISOString()) + '.png';
   }
 
-  protected randomVector(center: SketchVector, range: number): SketchVector {
+  protected random2Vector(center: SketchVector, range: number): SketchVector {
     let position = {
       x: center.x + (2 * Math.random() - 1) * range,
       y: center.y + (2 * Math.random() - 1) * range,
@@ -93,5 +94,9 @@ export abstract class Sketch {
     }
 
     return position;
+  }
+
+  protected randomColor(): SketchColor {
+    return {r: Math.random()*200 + 55, g: Math.random()*200 + 55, b: Math.random()*200 + 55};
   }
 }

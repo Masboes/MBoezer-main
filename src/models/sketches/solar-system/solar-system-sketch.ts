@@ -34,9 +34,9 @@ export class SolarSystemSketch extends Sketch {
 
       this.bodies = [];
       for(let i = 0; i < this.startBodies; i++) {
-        let position = this.randomVector(this.origin, Math.min(p.width, p.height) / 2);
-        let velocity = this.randomVector({x: 0, y: 0}, 0.0010);
-        let color = {r: Math.random()*200 + 55, g: Math.random()*200 + 55, b: Math.random()*200 + 55};
+        let position = this.random2Vector(this.origin, Math.min(p.width, p.height) / 2);
+        let velocity = this.random2Vector({x: 0, y: 0}, 0.0010);
+        let color = this.randomColor();
         let randomMass = Math.random() * 20;
         this.bodies.push(new GravitationalBody(randomMass, color, position, velocity));
       }
