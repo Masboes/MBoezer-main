@@ -13,7 +13,7 @@ export class WalkerSketch extends Sketch {
 
   private walkers: Walker[];
 
-  private walkerCount = 500;
+  private walkerCount = 10000;
   private randomType: RandomType = RandomType.Perlin;
 
   // moving and zooming related
@@ -40,14 +40,14 @@ export class WalkerSketch extends Sketch {
 
       this.walkers = [];
       for(let i = 0; i < this.walkerCount; i++) {
-        this.walkers.push(new Walker(this.random2Vector({x: 0, y:0}, Math.min(p.height, p.width) / 2), this.randomColor()));
+        this.walkers.push(new Walker({x: 0, y:0}, this.randomColor()));
       }
     }
   }
 
   protected draw(p: any): () => void {
     return () => {
-      p.background('rgba(255, 255, 255, 0.01)');
+      p.background('rgba(255, 255, 255, 0.1)');
 
       if (this.dragging) {
         this.origin = {
@@ -62,20 +62,6 @@ export class WalkerSketch extends Sketch {
 
 
       for(let walker of this.walkers) {
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
-        walker.update(this.randomType, p);
-        walker.draw(p);
         walker.update(this.randomType, p);
         walker.draw(p);
       }
