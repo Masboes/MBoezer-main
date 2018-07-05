@@ -1,5 +1,5 @@
-import {SketchVector} from "./sketch-vector";
-import {SketchColor} from "./sketch-color";
+import {SketchVector} from "../sketch-vector";
+import {SketchColor} from "../sketch-color";
 
 export class Walker {
   readonly circleRadius = 5;

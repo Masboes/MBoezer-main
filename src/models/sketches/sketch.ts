@@ -1,5 +1,6 @@
 import {FormFactory} from "../form/form-factory";
 import {Form} from "../form/form";
+import {SketchVector} from "./solar-system/sketch-vector";
 
 declare let p5; // imported in scripts
 
@@ -79,5 +80,18 @@ export abstract class Sketch {
   // util functions
   private getScreenshotFileName(): string {
     return 'screenshot-' + (new Date().toISOString()) + '.png';
+  }
+
+  protected randomVector(center: SketchVector, range: number): SketchVector {
+    let position = {
+      x: center.x + (2 * Math.random() - 1) * range,
+      y: center.y + (2 * Math.random() - 1) * range,
+    };
+    while(((center.x - position.x)**2 + (center.y - position.y)**2)**0.5 > range) {
+      position.x = center.x + (2 * Math.random() - 1) * range;
+      position.y = center.y + (2 * Math.random() - 1) * range;
+    }
+
+    return position;
   }
 }
