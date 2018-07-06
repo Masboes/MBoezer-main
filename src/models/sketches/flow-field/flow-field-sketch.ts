@@ -31,7 +31,19 @@ export class FlowFieldSketch extends Sketch {
   protected draw(p: any): () => void {
     return () => {
       if(!this.paused){
+        p.background(0);
+        p.stroke(255);
+        let step = 0.05;
+        let blocksize = 10;
+        let rows = Math.ceil(p.width / blocksize);
+        let cols = Math.ceil(p.height / blocksize);
 
+        for(let i = 0; i < rows; i++) {
+          for(let j = 0; j < cols; j++) {
+            let angle = p.noise(i * step, j * step, p.frameCount * step * 0.5) * 2 * Math.PI;
+            p.line(i * blocksize, j * blocksize, i * blocksize + Math.cos(angle) * blocksize * 2, j * blocksize + Math.sin(angle) * blocksize * 2);
+          }
+        }
       }
     }
   }
