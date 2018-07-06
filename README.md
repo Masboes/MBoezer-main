@@ -1,6 +1,6 @@
-# MBoezerMain
+# MBoezer-main
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+Welcome, this is the git repo for my own website, mboezer.com
 
 ## Development server
 
