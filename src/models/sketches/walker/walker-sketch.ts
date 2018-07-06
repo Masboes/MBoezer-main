@@ -13,8 +13,10 @@ export class WalkerSketch extends Sketch {
 
   private walkers: Walker[];
 
-  private walkerCount = 10000;
-  private randomType: RandomType = RandomType.Perlin;
+  // editable by settings
+  private paused = false;
+  private walkerCount = 500;
+  private randomType: RandomType = RandomType.Random;
 
   // moving and zooming related
   private dragging: boolean = false;
@@ -24,11 +26,27 @@ export class WalkerSketch extends Sketch {
 
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
+      .addToggleField('paused', this.paused, {label: 'Pause'})
+      .addSliderField('walkerCount', this.walkerCount, {label: 'Number of walkers', min: 100, max: 5000})
+      .addChoiceField(
+        'randomType',
+        this.randomType,
+        {
+          label: 'Walker type',
+          expanded: true,
+          choices: {
+            "Random": "Brownian Motion",
+            "Perlin": "Perlin Noise",
+          }
+        }
+        )
       .getForm();
   }
 
   public updateSettings(settings: any): void {
-
+    this.paused = settings['paused'];
+    this.walkerCount = settings['walkerCount'];
+    this.randomType = settings['randomType'];
   }
 
   protected setup(p: any): () => void {
@@ -62,7 +80,10 @@ export class WalkerSketch extends Sketch {
 
 
       for(let walker of this.walkers) {
-        walker.update(this.randomType, p);
+        if(!this.paused) {
+          walker.update(this.randomType, p);
+        }
+
         walker.draw(p);
       }
     }
@@ -71,6 +92,8 @@ export class WalkerSketch extends Sketch {
   protected mouseReleased(p: any): () => void {
     return () => {
       this.dragging = false;
+      p.draw();
+      p.draw();
     }
   }
 
@@ -86,6 +109,8 @@ export class WalkerSketch extends Sketch {
       this.zoomLevel -= 0.005 * event.delta;
       this.zoomLevel = Math.max(0, this.zoomLevel);
       p.background('rgba(255, 255, 255, 1.0)');
+      p.draw();
+      p.draw();
       return false;
     }
   }
