@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {Title} from "@angular/platform-browser";
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
-  templateUrl: './home-page.component.html'
+  templateUrl: './home-page.component.html',
+  styleUrls: [
+    "../../assets/home-page/css/bootstrap.min.css",
+    "../../assets/home-page/css/main.css",
+  ]
 })
-export class HomePageComponent implements OnInit {
 
-  constructor(private titleService: Title) {
-    this.titleService.setTitle("Home");
+export class HomePageComponent {
+
+  constructor(private router: Router, private titleService: Title) {
+    this.titleService.setTitle('Home');
   }
 
-  ngOnInit() {
+  public getStartedBtn(): void {
+    this.router.navigate(['/p5-sketches']);
   }
-
 }
