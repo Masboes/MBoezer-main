@@ -16,7 +16,6 @@ import {FlowFieldSketch} from "../../models/sketches/flow-field/flow-field-sketc
 })
 export class P5SketchesPageComponent implements OnInit {
   public sketchCards: Sketch[] = [
-    new DemoSketch(),
     new GameOfLifeSketch(),
     new SolarSystemSketch(),
     new WalkerSketch(),
