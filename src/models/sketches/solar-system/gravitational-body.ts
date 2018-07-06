@@ -1,5 +1,5 @@
-import {SketchVector} from "./sketch-vector";
-import {SketchColor} from "./sketch-color";
+import {SketchVector} from "../sketch-vector";
+import {SketchColor} from "../sketch-color";
 
 export class GravitationalBody {
   readonly bigG = 6.67408e-11; // 'big' 'e-11'

@@ -1,7 +1,7 @@
 import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
-import {SketchColor} from "./sketch-color";
+import {SketchColor} from "../sketch-color";
 
 export class GameOfLifeSketch extends Sketch {
   public sketchName: string = 'game-of-life';

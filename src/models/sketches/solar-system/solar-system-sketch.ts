@@ -2,7 +2,7 @@ import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
 import {GravitationalBody} from "./gravitational-body";
-import {SketchVector} from "./sketch-vector";
+import {SketchVector} from '../sketch-vector';
 
 export class SolarSystemSketch extends Sketch {
   public sketchName: string = 'solar-system-sketch';
@@ -29,14 +29,14 @@ export class SolarSystemSketch extends Sketch {
       this.origin = {x: 0, y: 0};
       this.offset = {x: 0, y: 0};
       this.dragging = false;
-      this.pause = false;
       this.zoomLevel = 1.0;
+      this.pause = false;
 
       this.bodies = [];
       for(let i = 0; i < this.startBodies; i++) {
-        let position = this.randomVector(this.origin, Math.min(p.width, p.height) / 2);
-        let velocity = this.randomVector({x: 0, y: 0}, 0.0010);
-        let color = {r: Math.random()*200 + 55, g: Math.random()*200 + 55, b: Math.random()*200 + 55};
+        let position = this.random2Vector(this.origin, Math.min(p.width, p.height) / 2);
+        let velocity = this.random2Vector({x: 0, y: 0}, 0.0010);
+        let color = this.randomColor();
         let randomMass = Math.random() * 20;
         this.bodies.push(new GravitationalBody(randomMass, color, position, velocity));
       }
@@ -93,19 +93,6 @@ export class SolarSystemSketch extends Sketch {
     }
   }
 
-  private randomVector(center: SketchVector, range: number): SketchVector {
-    let position = {
-      x: center.x + (2 * Math.random() - 1) * range,
-      y: center.y + (2 * Math.random() - 1) * range,
-    };
-    while(((center.x - position.x)**2 + (center.y - position.y)**2)**0.5 > range) {
-      position.x = center.x + (2 * Math.random() - 1) * range;
-      position.y = center.y + (2 * Math.random() - 1) * range;
-    }
-
-    return position;
-  }
-
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
       .addToggleField('pause', false, {label: 'Pause'})
@@ -119,5 +106,4 @@ export class SolarSystemSketch extends Sketch {
     this.pause = settings['pause'];
     this.startBodies = settings['startBodies'] * 1e2;
   }
-
 }
