@@ -7,6 +7,7 @@ import {SolarSystemSketch} from "../../models/sketches/solar-system/solar-system
 import {FormFactory} from "../../models/form/form-factory";
 import {Form} from "../../models/form/form";
 import {WalkerSketch} from "../../models/sketches/walker/walker-sketch";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -25,13 +26,16 @@ export class P5SketchesPageComponent implements OnInit {
   public sketchSettingsVisible: boolean = false; // whether the settings form is opened
   public form : Form|null; // settings form
 
-  constructor(private formFactory: FormFactory, private activatedRoute: ActivatedRoute) { }
+  constructor(private formFactory: FormFactory, private activatedRoute: ActivatedRoute, private titleService: Title) {
+    this.titleService.setTitle("P5 Sketches")
+  }
 
   ngOnInit() {
     this.activatedRoute.params.forEach((params: Params) => {
       if(params['sketch']) {
         this.cardsEnabled = false;
         this.loadSketchByName(params['sketch']);
+        this.titleService.setTitle("P5 Sketches - " + this.currentSketch.sketchTitle);
       }
     })
   }
