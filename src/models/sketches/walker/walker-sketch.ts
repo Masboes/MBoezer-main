@@ -16,7 +16,8 @@ export class WalkerSketch extends Sketch {
   // editable by settings
   private paused = false;
   private walkerCount = 500;
-  private randomType: RandomType = RandomType.Random;
+  private randomType: RandomType = RandomType.Perlin;
+  private stepFactor = 1.0;
 
   // moving and zooming related
   private dragging: boolean = false;
@@ -27,7 +28,8 @@ export class WalkerSketch extends Sketch {
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
       .addToggleField('paused', this.paused, {label: 'Pause'})
-      .addSliderField('walkerCount', this.walkerCount, {label: 'Number of walkers', min: 100, max: 5000})
+      .addSliderField('walkerCount', this.walkerCount / 100, {label: 'Number of walkers', min: 1, max: 50})
+      .addSliderField('stepFactor', this.stepFactor * 10, {label: 'Speed', min: 1, max: 20})
       .addChoiceField(
         'randomType',
         this.randomType,
@@ -35,8 +37,8 @@ export class WalkerSketch extends Sketch {
           label: 'Walker type',
           expanded: true,
           choices: {
-            "Random": "Brownian Motion",
             "Perlin": "Perlin Noise",
+            "Random": "Brownian Motion",
           }
         }
         )
@@ -45,8 +47,9 @@ export class WalkerSketch extends Sketch {
 
   public updateSettings(settings: any): void {
     this.paused = settings['paused'];
-    this.walkerCount = settings['walkerCount'];
+    this.walkerCount = settings['walkerCount'] * 100;
     this.randomType = settings['randomType'];
+    this.stepFactor = settings['stepFactor'] / 10;
   }
 
   protected setup(p: any): () => void {
@@ -65,7 +68,7 @@ export class WalkerSketch extends Sketch {
 
   protected draw(p: any): () => void {
     return () => {
-      p.background('rgba(255, 255, 255, 0.1)');
+      p.background('rgba(255, 255, 255, ' + this.stepFactor / 10 + ')');
 
       if (this.dragging) {
         this.origin = {
@@ -81,7 +84,7 @@ export class WalkerSketch extends Sketch {
 
       for(let walker of this.walkers) {
         if(!this.paused) {
-          walker.update(this.randomType, p);
+          walker.update(this.randomType, p, this.stepFactor);
         }
 
         walker.draw(p);
