@@ -8,6 +8,7 @@ import {FormFactory} from "../../models/form/form-factory";
 import {Form} from "../../models/form/form";
 import {WalkerSketch} from "../../models/sketches/walker/walker-sketch";
 import {Title} from "@angular/platform-browser";
+import {FlowFieldSketch} from "../../models/sketches/flow-field/flow-field-sketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -15,10 +16,10 @@ import {Title} from "@angular/platform-browser";
 })
 export class P5SketchesPageComponent implements OnInit {
   public sketchCards: Sketch[] = [
-    new DemoSketch(),
     new GameOfLifeSketch(),
     new SolarSystemSketch(),
     new WalkerSketch(),
+    new FlowFieldSketch(),
   ];
   public cardsEnabled = true;
   public currentSketch: Sketch;
