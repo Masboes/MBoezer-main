@@ -95,8 +95,6 @@ export class WalkerSketch extends Sketch {
   protected mouseReleased(p: any): () => void {
     return () => {
       this.dragging = false;
-      p.draw();
-      p.draw();
     }
   }
 
@@ -112,8 +110,6 @@ export class WalkerSketch extends Sketch {
       this.zoomLevel -= 0.005 * event.delta;
       this.zoomLevel = Math.max(0, this.zoomLevel);
       p.background('rgba(255, 255, 255, 1.0)');
-      p.draw();
-      p.draw();
       return false;
     }
   }
