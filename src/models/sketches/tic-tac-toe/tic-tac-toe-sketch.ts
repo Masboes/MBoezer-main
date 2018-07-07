@@ -1,7 +1,6 @@
 import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
-import * as tictactoe from 'tictactoe-ai/dist/tictactoe.min.js';
 
 export class TicTacToeSketch extends Sketch {
   public sketchName: string = 'tic-tac-toe';
@@ -109,16 +108,7 @@ export class TicTacToeSketch extends Sketch {
     this.aiMove = false;
     this.playerMove= true;
 
-    var board = new tictactoe.TicTacToeBoard(this.convertBoard()); //empty board flattened
-    console.log(board.board);
-    var aiTeam = board.oppositePlayer(this.playerSymbol);
-    let aiPlayer = new tictactoe.TicTacToeAIPlayer();
-    aiPlayer.initialize(aiTeam, board);
-    var move = aiPlayer.makeMove();
-    if(move != null){
-      console.log(move);
-      this.makeMove(move.y, move.x, this.aiSymbol);
-    }
+    
   }
 
   private makePlayerMove(col: number, row: number): void {
