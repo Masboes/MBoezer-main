@@ -10,7 +10,7 @@ export class PiApproximationSketch extends Sketch {
   public sketchDescription: string = 'A visual way to approximate Pi.';
 
   private paused: boolean = false;
-  private pointRadius: number = 2;
+  private pointRadius: number = 5;
   private pointsPerDraw: number = 10;
 
   private radius: number;
@@ -22,11 +22,15 @@ export class PiApproximationSketch extends Sketch {
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
       .addToggleField('paused', this.paused, {label: 'Pause'})
+      .addSliderField('pointsPerDraw', this.pointsPerDraw, {label: 'Points per frame', min: 1, max: 20 })
+      .addSliderField('pointRadius', this.pointRadius, {label: 'Point size', min: 1, max: 10 })
       .getForm();
   }
 
   public updateSettings(settings: any): void {
     this.paused = settings['paused'];
+    this.pointRadius = settings['pointRadius'];
+    this.pointsPerDraw = settings['pointsPerDraw'];
   }
 
   protected setup(p: any): () => void {
@@ -53,6 +57,7 @@ export class PiApproximationSketch extends Sketch {
         for(let i = 0; i < this.pointsPerDraw; i++) {
           this.addPoint(p);
         }
+        this.cleanOutliers(p);
       }
 
       this.updateApproxPi(p);
@@ -93,5 +98,12 @@ export class PiApproximationSketch extends Sketch {
     p.rect(this.origin.x - this.radius, this.origin.y - this.radius, this.radius * 2, this.radius * 2);
     p.noFill();
     p.ellipse(this.origin.x, this.origin.y, this.radius * 2, this.radius * 2);
+  }
+
+  private cleanOutliers(p: any): void {
+    p.fill(255);
+    p.rect(this.origin.x - this.radius - 10, this.origin.y - this.radius - 10, 10, this.radius * 2 + 20);
+    p.rect(this.origin.x + this.radius + 1, this.origin.y - this.radius - 10, 10, this.radius * 2 + 20);
+    p.rect(this.origin.x - this.radius - 10, this.origin.y - this.radius - 10, this.radius * 2 + 20, 10);
   }
 }
