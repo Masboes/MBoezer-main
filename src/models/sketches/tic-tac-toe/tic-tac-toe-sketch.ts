@@ -29,15 +29,32 @@ export class TicTacToeSketch extends Sketch {
 
   protected draw(p: any): () => void {
     return () => {
-      p.translate(p.width/2, p.height/2)
-      let width = Math.min(p.width, p.height) * 0.9;
-      p.stroke(0);
-      p.noFill();
-      p.rect()
+      p.translate(p.width/2, p.height/2);
+      this.drawBoard(p);
     }
   }
 
   private drawBoard(p: any): void {
+    let width = Math.min(p.width, p.height) * 0.9;
+    p.stroke(0);
+    p.noFill();
+    for(let i = 0; i < this.board.length; i++) {
+      for(let j = 0; j < this.board[i].length; j++) {
+        p.rect(-width/2 + i * width/3, -width/2 + j * width/3, width/3, width/3);
+
+        if(this.board[i][j] == 'X') {
+          p.strokeWeight(4);
+          p.stroke(0);
+          p.line(-width/2 + i * width/3, -width/2 + j * width/3, -width/2 + (i+1) * width/3, -width/2 + (j+1) * width/3);
+          p.line(-width/2 + i * width/3, -width/2 + (j+1) * width/3, -width/2 + (i+1) * width/3, -width/2 + j * width/3);
+        } else if (this.board[i][j] == 'O') {
+          p.ellipse(-width/2 + i * width/3 + width/6, -width/2 + j * width/3 + width/6, width/3, width/3)
+        }
+      }
+    }
+  }
+
+  private AIMove(p: any): void  {
 
   }
 }
