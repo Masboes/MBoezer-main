@@ -10,6 +10,7 @@ import {WalkerSketch} from "../../models/sketches/walker/walker-sketch";
 import {Title} from "@angular/platform-browser";
 import {FlowFieldSketch} from "../../models/sketches/flow-field/flow-field-sketch";
 import {PiApproximationSketch} from "../../models/sketches/pi-approximation/pi-approximation-sketch";
+import {TicTacToeSketch} from "../../models/sketches/tic-tac-toe/tic-tac-toe-sketch";
 
 @Component({
   selector: 'app-p5-sketches-page',
@@ -22,6 +23,7 @@ export class P5SketchesPageComponent implements OnInit {
     new WalkerSketch(),
     new FlowFieldSketch(),
     new PiApproximationSketch(),
+    new TicTacToeSketch(),
   ];
   public cardsEnabled = true;
   public currentSketch: Sketch;
