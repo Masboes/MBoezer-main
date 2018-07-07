@@ -74,6 +74,8 @@ export class TicTacToeSketch extends Sketch {
 
   private drawBoard(p: any): void {
     let width = Math.min(p.width, p.height) * 0.9;
+    let boxMargin = width/24;
+
     p.background(255);
     p.stroke(0);
     p.noFill();
@@ -85,11 +87,11 @@ export class TicTacToeSketch extends Sketch {
         if(this.board[i][j] == 'X') {
           p.strokeWeight(4);
           p.stroke(0);
-          p.line(-width/2 + i * width/3, -width/2 + j * width/3, -width/2 + (i+1) * width/3, -width/2 + (j+1) * width/3);
-          p.line(-width/2 + i * width/3, -width/2 + (j+1) * width/3, -width/2 + (i+1) * width/3, -width/2 + j * width/3);
+          p.line(-width/2 + i * width/3 + boxMargin, -width/2 + j * width/3 + boxMargin, -width/2 + (i+1) * width/3 - boxMargin, -width/2 + (j+1) * width/3 - boxMargin);
+          p.line(-width/2 + i * width/3 + boxMargin, -width/2 + (j+1) * width/3 - boxMargin, -width/2 + (i+1) * width/3 - boxMargin, -width/2 + j * width/3 + boxMargin);
         } else if (this.board[i][j] == 'O') {
           p.strokeWeight(4);
-          p.ellipse(-width/2 + i * width/3 + width/6, -width/2 + j * width/3 + width/6, width/3, width/3)
+          p.ellipse(-width/2 + i * width/3 + width/6, -width/2 + j * width/3 + width/6, width/3 - boxMargin, width/3 - boxMargin)
         }
       }
     }
