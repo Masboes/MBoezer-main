@@ -54,7 +54,18 @@ export class TicTacToeSketch extends Sketch {
     }
   }
 
-  private AIMove(p: any): void  {
+  private finished(p: any): boolean {
+    let finished = false;
 
+    for(let i = 0; i < 3; i++) {
+      finished = finished || (this.board[i][0] == this.board[i][1] && this.board[i][1] == this.board[i][2] && (this.board[i][0] == 'X' || this.board[i][0] == 'O'));
+    }
+    for(let i = 0; i < 3; i++) {
+      finished = finished || (this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i] && (this.board[0][i] == 'X' || this.board[0][i] == 'O'));
+    }
+    finished = finished || (this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2] && (this.board[1][1] == 'X' || this.board[1][1] == 'O'));
+    finished = finished || (this.board[0][2] == this.board[1][1] && this.board[1][1] == this.board[0][2] && (this.board[1][1] == 'X' || this.board[1][1] == 'O'));
+
+    return finished
   }
 }
