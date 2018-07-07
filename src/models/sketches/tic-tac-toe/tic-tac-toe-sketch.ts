@@ -1,6 +1,7 @@
 import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
+import * as ticTacToeAiEngine from 'tic-tac-toe-ai-engine';
 
 export class TicTacToeSketch extends Sketch {
   public sketchName: string = 'tic-tac-toe';
@@ -11,24 +12,28 @@ export class TicTacToeSketch extends Sketch {
   private board: string[][];
   private aiSymbol = 'X';
   private playerSymbol = 'O';
-  private aiMove: boolean = true;
-  private playerMove: boolean = false;
+  private aiMove: boolean;
+  private playerMove: boolean;
+
+  private playerFirst: boolean = false;
 
   public getSettingsForm(formFactory: FormFactory): Form {
     return formFactory.createFormBuilder()
-
+      .addToggleField('playerFirst', this.playerFirst, {label: 'Player starts'})
       .getForm();
   }
 
   public updateSettings(settings: any): void {
-
+    this.playerFirst = settings['playerFirst'];
+    this.aiMove = !this.playerFirst;
+    this.playerMove = this.playerFirst;
+    this.board = [['', '', ''],['', '', ''],['', '', '']];
   }
 
   protected setup(p: any): () => void {
     return () => {
-      console.log('reset');
-      this.aiMove = true;
-      this.playerMove = false;
+      this.aiMove = !this.playerFirst;
+      this.playerMove = this.playerFirst;
       this.board = [['', '', ''],['', '', ''],['', '', '']];
       p.draw();
     }
@@ -68,13 +73,13 @@ export class TicTacToeSketch extends Sketch {
   }
 
   private drawBoard(p: any): void {
-    console.log('draw');
     let width = Math.min(p.width, p.height) * 0.9;
     p.background(255);
     p.stroke(0);
     p.noFill();
     for(let i = 0; i < this.board.length; i++) {
       for(let j = 0; j < this.board[i].length; j++) {
+        p.strokeWeight(1);
         p.rect(-width/2 + i * width/3, -width/2 + j * width/3, width/3, width/3);
 
         if(this.board[i][j] == 'X') {
@@ -83,6 +88,7 @@ export class TicTacToeSketch extends Sketch {
           p.line(-width/2 + i * width/3, -width/2 + j * width/3, -width/2 + (i+1) * width/3, -width/2 + (j+1) * width/3);
           p.line(-width/2 + i * width/3, -width/2 + (j+1) * width/3, -width/2 + (i+1) * width/3, -width/2 + j * width/3);
         } else if (this.board[i][j] == 'O') {
+          p.strokeWeight(4);
           p.ellipse(-width/2 + i * width/3 + width/6, -width/2 + j * width/3 + width/6, width/3, width/3)
         }
       }
@@ -108,7 +114,14 @@ export class TicTacToeSketch extends Sketch {
     this.aiMove = false;
     this.playerMove= true;
 
-    
+    let oldBoard = this.convertBoard(this.playerFirst);
+    let updateBoard = ticTacToeAiEngine.computeMove(oldBoard).nextBestGameState;
+
+    for(let i = 0; i < updateBoard.length; i++) {
+      if(updateBoard[i] != oldBoard[i]) {
+        this.makeMove(i % 3, Math.floor(i/3), this.aiSymbol);
+      }
+    }
   }
 
   private makePlayerMove(col: number, row: number): void {
@@ -125,13 +138,24 @@ export class TicTacToeSketch extends Sketch {
     }
   }
 
-  private convertBoard(): string[] {
+  private convertBoard(swapSymbols = false): string[] {
     let board = [];
     for(let row = 0; row < this.board[0].length; row++) {
       for(let col = 0; col < this.board.length; col++) {
-        board.push(this.board[col][row]);
+        if(swapSymbols) {
+          if(this.board[col][row] == this.aiSymbol) {
+            board.push(this.playerSymbol);
+          } else if (this.board[col][row] == this.playerSymbol) {
+            board.push(this.aiSymbol);
+          } else {
+            board.push('');
+          }
+        } else {
+          board.push(this.board[col][row]);
+        }
       }
     }
+    console.log(board);
     return board;
   }
 }
