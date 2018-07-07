@@ -1,7 +1,7 @@
 import {Sketch} from "../sketch";
 import {FormFactory} from "../../form/form-factory";
 import {Form} from "../../form/form";
-import {SketchColor} from "../sketch-color";
+import * as tictactoe from 'tictactoe-ai/dist/tictactoe.min.js';
 
 export class TicTacToeSketch extends Sketch {
   public sketchName: string = 'tic-tac-toe';
@@ -27,9 +27,11 @@ export class TicTacToeSketch extends Sketch {
 
   protected setup(p: any): () => void {
     return () => {
+      console.log('reset');
       this.aiMove = true;
       this.playerMove = false;
       this.board = [['', '', ''],['', '', ''],['', '', '']];
+      p.draw();
     }
   }
 
@@ -37,11 +39,11 @@ export class TicTacToeSketch extends Sketch {
     return () => {
       p.translate(p.width/2, p.height/2);
 
+      this.drawBoard(p);
+
       if(this.aiMove) {
         this.makeAIMove();
       }
-
-      this.drawBoard(p);
     }
   }
 
@@ -67,6 +69,7 @@ export class TicTacToeSketch extends Sketch {
   }
 
   private drawBoard(p: any): void {
+    console.log('draw');
     let width = Math.min(p.width, p.height) * 0.9;
     p.background(255);
     p.stroke(0);
@@ -106,15 +109,15 @@ export class TicTacToeSketch extends Sketch {
     this.aiMove = false;
     this.playerMove= true;
 
-    let counter = 0;
-    while (true && counter < 100) {
-      counter++;
-      let col = Math.floor(Math.random()*3);
-      let row = Math.floor(Math.random()*3);
-      if(this.board[col][row] == '') {
-        this.makeMove(col, row, this.aiSymbol);
-        return;
-      }
+    var board = new tictactoe.TicTacToeBoard(this.convertBoard()); //empty board flattened
+    console.log(board.board);
+    var aiTeam = board.oppositePlayer(this.playerSymbol);
+    let aiPlayer = new tictactoe.TicTacToeAIPlayer();
+    aiPlayer.initialize(aiTeam, board);
+    var move = aiPlayer.makeMove();
+    if(move != null){
+      console.log(move);
+      this.makeMove(move.y, move.x, this.aiSymbol);
     }
   }
 
@@ -130,5 +133,15 @@ export class TicTacToeSketch extends Sketch {
       this.playerMove = false;
       this.aiMove = false;
     }
+  }
+
+  private convertBoard(): string[] {
+    let board = [];
+    for(let row = 0; row < this.board[0].length; row++) {
+      for(let col = 0; col < this.board.length; col++) {
+        board.push(this.board[col][row]);
+      }
+    }
+    return board;
   }
 }
