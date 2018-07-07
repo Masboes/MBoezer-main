@@ -36,6 +36,8 @@ export class PiApproximationSketch extends Sketch {
   protected setup(p: any): () => void {
     return () => {
       this.radius = Math.min(p.height, p.width) / 2 * 0.8;
+      this.totalPoints = 0;
+      this.inCirclePoints = 0;
 
       p.translate(p.width / 2, p.height / 2);
       p.background(255);
