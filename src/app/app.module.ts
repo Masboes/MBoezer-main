@@ -31,6 +31,7 @@ import {ToolbarComponent} from "../components/toolbar/toolbar.component";
 import {FormComponent} from "../components/form/form.component";
 import {ToolsPageComponent} from "../components/tools-page/tools-page.component";
 import {RequestMakerComponent} from "../components/tools-page/tools/request-maker/request-maker.component";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     ReactiveFormsModule,
     NgPipesModule,
+    HttpClientModule,
   ],
   exports: [
     MatDialogModule,
