@@ -32,7 +32,7 @@ export class P5SketchesPageComponent implements OnInit {
   public form : Form|null; // settings form
 
   constructor(private formFactory: FormFactory, private activatedRoute: ActivatedRoute, private titleService: Title) {
-    this.titleService.setTitle("P5 Sketches")
+    this.titleService.setTitle("P5 Sketches");
   }
 
   ngOnInit() {

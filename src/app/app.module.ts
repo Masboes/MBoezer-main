@@ -29,11 +29,13 @@ import {AboutPageComponent} from "../components/about-page/about-page.component"
 import {SidebarComponent} from "../components/sidebar/sidebar.component";
 import {ToolbarComponent} from "../components/toolbar/toolbar.component";
 import {FormComponent} from "../components/form/form.component";
+import {ToolsPageComponent} from "../components/tools-page/tools-page.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomePageComponent},
   { path: 'p5-sketches', component: P5SketchesPageComponent},
+  { path: 'tools', component: ToolsPageComponent},
   { path: 'p5-sketches/:sketch', component: P5SketchesPageComponent},
   { path: 'about', component: AboutPageComponent},
 ];
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     SidebarComponent,
     ToolbarComponent,
     P5SketchesPageComponent,
+    ToolsPageComponent,
     HomePageComponent,
     AboutPageComponent,
     FormComponent,
