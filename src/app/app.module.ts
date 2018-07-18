@@ -30,14 +30,16 @@ import {SidebarComponent} from "../components/sidebar/sidebar.component";
 import {ToolbarComponent} from "../components/toolbar/toolbar.component";
 import {FormComponent} from "../components/form/form.component";
 import {ToolsPageComponent} from "../components/tools-page/tools-page.component";
+import {RequestMakerComponent} from "../components/tools-page/tools/request-maker/request-maker.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomePageComponent},
   { path: 'p5-sketches', component: P5SketchesPageComponent},
-  { path: 'tools', component: ToolsPageComponent},
   { path: 'p5-sketches/:sketch', component: P5SketchesPageComponent},
   { path: 'about', component: AboutPageComponent},
+  { path: 'tools', component: ToolsPageComponent},
+  { path: 'tools/request-maker', component: RequestMakerComponent},
 ];
 
 @NgModule({
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     ToolbarComponent,
     P5SketchesPageComponent,
     ToolsPageComponent,
+    RequestMakerComponent,
     HomePageComponent,
     AboutPageComponent,
     FormComponent,
